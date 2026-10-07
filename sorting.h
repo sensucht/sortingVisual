@@ -1,3 +1,10 @@
+/*
+ * This header establishes the logic underneath the program,
+ * defining the sorting algorithms. It also records the actions dones,
+ * in the forms of swaps and compares between columns, which will later
+ * be used in visual representation
+ */
+
 #ifndef SORTING_H
 #define SORTING_H
 

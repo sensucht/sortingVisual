@@ -9,7 +9,9 @@ void recordBubbleSort(int *arr, int size, Action *script, int *actionCount) {
   for (i = 0; i < size - 1; i++) {
     swapped = false;
 
-    for (j = 0; j < size - i; j++) {
+    // We subtract an extra 1 from size to prevent an out-of-bonds memory error
+    //  when we check arr[j + 1] inside the loop
+    for (j = 0; j < size - i - 1; j++) {
 
       script[*actionCount].type = 0; // COMPARE
       script[*actionCount].indexA = j;
@@ -48,7 +50,7 @@ void recordSelectionSort(int *arr, int size, Action *script, int *actionCount) {
   for (i = 0; i < size - 1; i++) {
     smallest = i;
 
-    for (j = 0; j < size; j++) {
+    for (j = i + 1; j < size; j++) {
       script[*actionCount].type = 0; // COMPARE
       script[*actionCount].indexA = smallest;
       script[*actionCount].indexB = j;

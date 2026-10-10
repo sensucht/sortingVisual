@@ -10,9 +10,10 @@ void drawColumns(int *arr, int size, int screenWidth, int screenHeight,
   int i;
   float x, y, height;
   float colWidth = (float)screenWidth / size;
-  Color colColor = MAROON;
 
   for (i = 0; i < size; i++) {
+    Color colColor = MAROON;
+
     if (i == activeA || i == activeB) {
       if (actionType == 0) {
         colColor = YELLOW; // COMPARE, colors the involved columns yellow

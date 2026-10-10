@@ -95,7 +95,8 @@ int main() {
 
       // -------Button clicks and array generation------------
 
-      if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && charCount > 0) {
+      if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && charCount > 0 &&
+          atoi(inputText) > 0) {
         size = atoi(inputText); // Transforms the user input (a string) into a
                                 // integer, to allow the given size to be used
                                 // in the defined functions

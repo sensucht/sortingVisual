@@ -1,8 +1,12 @@
 #include "graphics.h"
 #include <raylib.h>
+#include <stddef.h> // for NULL definition
 
 void drawColumns(int *arr, int size, int screenWidth, int screenHeight,
                  int activeA, int activeB, int actionType) {
+  if (arr == NULL)
+    return; // Prevents segfault
+
   int i;
   float x, y, height;
   float colWidth = (float)screenWidth / size;

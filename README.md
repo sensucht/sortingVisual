@@ -43,7 +43,8 @@ gcc main.c arrayManager.c sorting.c graphics.c -o visualizer -lraylib -framework
 ```
 
 ## To do:
+* Modularize the main.c program and get most of its spaghetti-ish code into separate functions in an app.c file. 
 * Add additional failsafes
 * Add speed modulation to visualize the algorithms slower or faster
-* Add user given range for pseud-random number generation
+* Add user given range for pseudo-random number generation
 * Add additional sorting algorithms (starting with Insertion Sort)

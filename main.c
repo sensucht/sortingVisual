@@ -1,5 +1,5 @@
 /*
- * Given an size input (up to 9 integer digits) from the user, and the selection
+ * Given an size input (up to 500 columns) from the user, and the selection
  * of one of the avaliable sorting algorithms, this program will generate an
  * array of said user given size by dynamic memory allocation. It will then
  * assign pseudo-random values (through stdlib.h and time.h functions) to each
@@ -46,7 +46,7 @@ int main() {
   bool isAnimating = false;
   bool isSorting = false;
 
-  char inputText[10] = "\0";
+  char inputText[4] = "\0";
   int charCount = 0;
 
   //=========================================
@@ -79,7 +79,7 @@ int main() {
       int key = GetCharPressed();
       while (key > 0) {
         // Only accepts numeric inputs (ASCII 48-57) and prevents array overflow
-        if ((key >= 48) && (key <= 57) && (charCount < 9)) {
+        if ((key >= 48) && (key <= 57) && (charCount < 3)) {
           inputText[charCount] = (char)key;
           inputText[charCount + 1] = '\0';
           charCount++;
@@ -100,6 +100,13 @@ int main() {
         size = atoi(inputText); // Transforms the user input (a string) into a
                                 // integer, to allow the given size to be used
                                 // in the defined functions
+
+        int maxSize = 500;
+        if (size >
+            maxSize) { // Caps number of columns to 500, since the visualizer
+                       // stops rendering them correctly after this point.
+          size = maxSize;
+        }
 
         if (CheckCollisionPointRec(mousePoint, buttonBubble)) {
           // If the mouse clicks the bubble sort button, executes bubble sort

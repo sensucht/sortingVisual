@@ -11,6 +11,7 @@
 #include "graphics.h"
 #include "raylib.h"
 #include "sorting.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -103,7 +104,22 @@ int main() {
           // If the mouse clicks the bubble sort button, executes bubble sort
           visualArray = arrayCreate(size);
           backgroundArray = arrayCreate(size);
-          script = (Action *)malloc(size * size * sizeof(Action));
+          size_t scriptSize = (size_t)size * size * sizeof(Action);
+          script = malloc(scriptSize);
+
+          if (script == NULL) { // Checks if allocation succeeded
+            fprintf(stderr, "Error: Memory allocation failed.\n");
+
+            // Resets state of the variables
+            free(visualArray);
+            free(backgroundArray);
+            visualArray = NULL;
+            backgroundArray = NULL;
+            charCount = 0;
+            inputText[0] = '\0';
+
+            return 1;
+          }
 
           arrayGenerateData(visualArray, size, 50, screenHeight - 100);
           arrayCopy(backgroundArray, visualArray, size);
@@ -118,7 +134,22 @@ int main() {
           // sort
           visualArray = arrayCreate(size);
           backgroundArray = arrayCreate(size);
-          script = (Action *)malloc(size * size * sizeof(Action));
+          size_t scriptSize = (size_t)size * size * sizeof(Action);
+          script = malloc(scriptSize);
+
+          if (script == NULL) { // Checks if allocation succeeded.
+            fprintf(stderr, "Error: Memory allocation failed.\n");
+
+            // Resets state of the variables
+            free(visualArray);
+            free(backgroundArray);
+            visualArray = NULL;
+            backgroundArray = NULL;
+            charCount = 0;
+            inputText[0] = '\0';
+
+            return 1;
+          }
 
           arrayGenerateData(visualArray, size, 50, screenHeight - 100);
           arrayCopy(backgroundArray, visualArray, size);

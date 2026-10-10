@@ -1,10 +1,21 @@
 #include "arrayManager.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 int *arrayCreate(int size) { // Creates a new array, of a size given by user
                              // Input, by dinamically allocating memory
-  int total = size * sizeof(int);
-  int *newArray = (int *)malloc(total);
+  if (size <= 0) {           // Validates user input
+    fprintf(stderr, "Error: Array size must be greater than 0\n");
+    return NULL;
+  }
+
+  size_t total = (size_t)size * sizeof(int);
+  int *newArray = malloc(total);
+
+  if (newArray == NULL) { // Checks if allocation actually succeeded
+    fprintf(stderr, "Error: Memory allocation failed.\n");
+    exit(EXIT_FAILURE);
+  }
 
   return newArray;
 }

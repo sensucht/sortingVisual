@@ -19,32 +19,31 @@ To compile and run this project, you will need:
 * [Raylib](https://www.raylib.com/) installed on your system
 
 ## Compilation / How to Run
+Open your terminal in the project directory and run:
 
 ### Linux
-Open your terminal in the project directory and run:
+
 ```bash
-gcc main.c arrayManager.c sorting.c graphics.c -o visualizer -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+gcc src/main.c src/app.c src/arrayManager.c src/sorting.c src/graphics.c -I include/ -o visualizer -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 ./visualizer
 ```
 
 ### Windows (MinGW)
 ```bash
 
-gcc main.c arrayManager.c sorting.c graphics.c -o visualizer.exe -O1 -Wall -std=c99 -Wno-missing-braces -I include/ -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
-visualizer.exe
+gcc src/main.c src/app.c src/arrayManager.c src/sorting.c src/graphics.c -o visualizer.exe -O1 -Wall -std=c99 -Wno-missing-braces -I include/ -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+.\visualizer.exe
 ```
 
 ### macOS
 
 ```bash
 
-gcc main.c arrayManager.c sorting.c graphics.c -o visualizer -lraylib -framework OpenGL -framework Cocoa -framework IOKit -framework CoreAudio -framework CoreVideo
+gcc src/main.c src/app.c src/arrayManager.c src/sorting.c src/graphics.c -I include/ -o visualizer -lraylib -framework OpenGL -framework Cocoa -framework IOKit -framework CoreAudio -framework CoreVideo
 ./visualizer
 ```
 
 ## To do:
-* Modularize the main.c program and get most of its spaghetti-ish code into separate functions in an app.c file. 
-* Add additional failsafes
 * Add speed modulation to visualize the algorithms slower or faster
 * Add user given range for pseudo-random number generation
 * Add additional sorting algorithms (starting with Insertion Sort)

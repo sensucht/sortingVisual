@@ -38,6 +38,7 @@ typedef struct {
   Rectangle textBox;
   Rectangle buttonBubble;
   Rectangle buttonSelection;
+  Rectangle buttonInsertion;
   Rectangle buttonBack;
 
 } AppContext;

@@ -7,7 +7,7 @@
  * miliseconds, the user will see an animation of the sorting algorithm's
  * process, slowed down to allow comprehension
  */
-#include "app.h"
+#include "../include/app.h"
 #include <stdlib.h>
 #include <time.h>
 

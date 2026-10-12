@@ -1,6 +1,6 @@
-#include "app.h"
-#include "arrayManager.h"
-#include "graphics.h"
+#include "../include/app.h"
+#include "../include/arrayManager.h"
+#include "../include/graphics.h"
 #include <raylib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,13 +9,13 @@ void appInit(AppContext *app) {
   // Initializes variables to their default state.
 
   //----------Screen size constants and app state (MENU or
-  //SORTING)--------------
+  // SORTING)--------------
   app->screenWidth = 1024;
   app->screenHeight = 768;
   app->currentState = MENU;
 
   //---------------------Array and animation state related
-  //variables----------------
+  // variables----------------
   app->size = 0;
   app->visualArray = NULL;
   app->backgroundArray = NULL;
@@ -39,6 +39,8 @@ void appInit(AppContext *app) {
                                   app->screenHeight / 2 + 80, 140, 40};
   app->buttonSelection = (Rectangle){app->screenWidth / 2 + 10,
                                      app->screenHeight / 2 + 80, 140, 40};
+  app->buttonInsertion = (Rectangle){app->screenWidth / 2 - 70,
+                                     app->screenHeight / 2 + 130, 140, 40};
 }
 
 void appUpdate(AppContext *app) {
@@ -141,6 +143,38 @@ void appUpdate(AppContext *app) {
         app->isAnimating = true;
         app->currentState = SORTING;
       }
+
+      if (CheckCollisionPointRec(mousePoint, app->buttonInsertion)) {
+        // If the mouse clicks the Insertion sort button, executes Insertion
+        // Sort.
+        app->visualArray = arrayCreate(app->size);
+        app->backgroundArray = arrayCreate(app->size);
+        size_t scriptSize = (size_t)app->size * app->size * sizeof(Action);
+        app->script = malloc(scriptSize);
+
+        if (app->script == NULL) { //   Checks if allocation succeeded.
+          fprintf(stderr, "Error: Memory allocation failed.\n");
+
+          // Resets state of the variables
+          free(app->visualArray);
+          free(app->backgroundArray);
+          app->visualArray = NULL;
+          app->backgroundArray = NULL;
+          app->charCount = 0;
+          app->inputText[0] = '\0';
+
+          return;
+        }
+
+        arrayGenerateData(app->visualArray, app->size, 50,
+                          app->screenHeight - 100);
+        arrayCopy(app->backgroundArray, app->visualArray, app->size);
+
+        recordInsertionSort(app->backgroundArray, app->size, app->script,
+                            &app->totalActions);
+        app->isAnimating = true;
+        app->currentState = SORTING;
+      }
     }
     //----------------Return button--------------
   } else if (app->currentState == SORTING) {
@@ -218,6 +252,14 @@ void appDraw(AppContext *app) {
     DrawRectangleRec(app->buttonSelection, buttonColor2);
     DrawText("Selection Sort", (int)app->buttonSelection.x + 5,
              (int)app->buttonSelection.y + 10, 18, WHITE);
+
+    Color buttonColor3 =
+        CheckCollisionPointRec(mousePoint, app->buttonInsertion) ? BLUE
+                                                                 : DARKBLUE;
+    DrawRectangleRec(app->buttonInsertion, buttonColor3);
+    DrawText("Insertion Sort", (int)app->buttonInsertion.x + 5,
+             (int)app->buttonInsertion.y + 10, 18, WHITE);
+
   } else if (app->currentState == SORTING) {
     //---------------------Draws columns------------------------------
     drawColumns(app->visualArray, app->size, app->screenWidth,

@@ -1,4 +1,4 @@
-#include "sorting.h"
+#include "../include/sorting.h"
 #include <stdbool.h>
 
 void recordBubbleSort(int *arr, int size, Action *script, int *actionCount) {
@@ -71,6 +71,39 @@ void recordSelectionSort(int *arr, int size, Action *script, int *actionCount) {
       temp = arr[i];
       arr[i] = arr[smallest];
       arr[smallest] = temp;
+    }
+  }
+}
+
+void recordInsertionSort(int *arr, int size, Action *script, int *actionCount) {
+  int i, j;
+  int temp;
+
+  for (i = 1; i < size; i++) {
+    j = i;
+
+    while (j > 0) {
+      script[*actionCount].type = 0; // COMPARE
+      script[*actionCount].indexA = j - 1;
+      script[*actionCount].indexB = j;
+      (*actionCount)++;
+
+      if (arr[j - 1] > arr[j]) {
+        script[*actionCount].type = 1; // SWAP
+        script[*actionCount].indexA = j - 1;
+        script[*actionCount].indexB = j;
+        (*actionCount)++;
+
+        // Actually does the swapping
+        temp = arr[j - 1];
+        arr[j - 1] = arr[j];
+        arr[j] = temp;
+
+        j--;
+      } else {
+        break; // If the current element is not larger, the current element is
+               // in its correct place
+      }
     }
   }
 }

@@ -12,6 +12,7 @@ An interactive sorting algorithm visualizer built in C using the **Raylib** libr
 ### $O(n^2)$ sorting algorithms
 * Selection sort
 * Bubble Sort
+* Insertion Sort
 
 ## Prerequisites
 To compile and run this project, you will need:
@@ -46,4 +47,4 @@ gcc src/main.c src/app.c src/arrayManager.c src/sorting.c src/graphics.c -I incl
 ## To do:
 * Add speed modulation to visualize the algorithms slower or faster
 * Add user given range for pseudo-random number generation
-* Add additional sorting algorithms (starting with Insertion Sort)
+* Add additional sorting algorithms (next is Cycle Sort)
